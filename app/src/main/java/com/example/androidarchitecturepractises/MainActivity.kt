@@ -3,6 +3,7 @@ package com.example.androidarchitecturepractises
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.androidarchitecturepractises.databinding.ActivityMainBinding
 
 /// NOTE: We can't use dataBinding and viewBinding together
@@ -12,6 +13,7 @@ import com.example.androidarchitecturepractises.databinding.ActivityMainBinding
 /// ButterKnife, KotterKnife or KAE (Kotlin Android Extensions) but don't want to invest in databinding refactoring.
 class MainActivity : AppCompatActivity() {
     lateinit var activityMainBinding: ActivityMainBinding
+    lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,5 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         /// we pass the data to be used in the view
         activityMainBinding.quote = Quote("This is a random quote", "An Author")
+
+        /// if we are using livedata in a dataBinding, then we need to set the lifecycleOwner
+        activityMainBinding.lifecycleOwner = this
+
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        activityMainBinding.mainViewModel = mainViewModel
     }
 }

@@ -13,6 +13,17 @@
         <variable
             name="quote"
             type="com.example.androidarchitecturepractises.Quote" />
+
+        <variable
+            name="mainViewModel"
+            type="com.example.androidarchitecturepractises.MainViewModel" />
+
+        <variable
+            name="newQuoteQuote"
+            type="String" />
+        <variable
+            name="newQuoteAuthor"
+            type="String" />
     </data>
 
     <LinearLayout
@@ -22,20 +33,49 @@
         android:gravity="center"
         tools:context=".MainActivity">
 
+<!--        This is how we assign value to a variable from view, @={variableName} , add = and it will be assigned-->
+<!--        We can directly update viewModel data from here as well, using this logic-->
+
+<!--        If quote was a string, it would updated like this-->
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@={mainViewModel.quote.quote}"-->
+<!--            />-->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={newQuoteQuote}"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={newQuoteAuthor}"
+            />
+
 <!--        Step 3: we use the defined variable, like `@{variable.property}`-->
         <TextView
             android:id="@+id/quoteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{quote.quote}"
+            android:text="@{mainViewModel.quote.quote}"
             android:textSize="26dp"/>
 
         <TextView
             android:id="@+id/quoteAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{quote.author}"
+            android:text="@{mainViewModel.quote.author}"
             android:textSize="22dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update quote"
+            android:onClick="@{() -> mainViewModel.updateQuote(newQuoteQuote, newQuoteAuthor)}"
+            />
 
     </LinearLayout>
 </layout>
