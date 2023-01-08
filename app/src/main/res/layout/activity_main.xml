@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--Steps for Data Binding-->
+<!--Step 1: Wrap the root layout in the <layout> tag-->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+<!--        Step 2: Define a variable with a name and type to be used-->
+<!--        The variable type can be of any type-->
+        <variable
+            name="quote"
+            type="com.example.androidarchitecturepractises.Quote" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".MainActivity">
+
+<!--        Step 3: we use the defined variable, like `@{variable.property}`-->
+        <TextView
+            android:id="@+id/quoteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{quote.quote}"
+            android:textSize="26dp"/>
+
+        <TextView
+            android:id="@+id/quoteAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{quote.author}"
+            android:textSize="22dp"/>
+
+    </LinearLayout>
+</layout>
