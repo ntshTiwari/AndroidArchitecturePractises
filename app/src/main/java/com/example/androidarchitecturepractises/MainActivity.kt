@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        /// in order to access higher quality, very large files, glide fails
         val post = Post("Post title", "Post description", "https://goo.gl/gEgYUd")
 
         activityMainBinding.post = post
